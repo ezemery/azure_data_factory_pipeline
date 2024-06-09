@@ -641,7 +641,11 @@
 								"referenceName": "stagingBlob",
 								"type": "DatasetReference"
 							},
-							"name": "sinktoBlobStorage"
+							"name": "sinktoBlobStorage",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [
@@ -750,6 +754,7 @@
 						"     insertable:true,",
 						"     updateable:false,",
 						"     upsertable:false,",
+						"     truncate:true,",
 						"     format: 'table',",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
@@ -758,7 +763,12 @@
 						"     validateSchema: false,",
 						"     truncate: true,",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> sinktoBlobStorage"
+						"     skipDuplicateMapOutputs: true,",
+						"     mapColumn(",
+						"          FiscalYear,",
+						"          AgencyName,",
+						"          TotalPaid",
+						"     )) ~> sinktoBlobStorage"
 					]
 				}
 			},
@@ -766,7 +776,8 @@
 				"[concat(variables('factoryId'), '/datasets/nycpayroll2020_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/nycpayroll2021_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/nycpayrollsummary_dataset')]",
-				"[concat(variables('factoryId'), '/datasets/stagingBlob')]"
+				"[concat(variables('factoryId'), '/datasets/stagingBlob')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{
