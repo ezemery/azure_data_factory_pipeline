@@ -21,7 +21,7 @@
 		},
 		"AzureSynapseAnalytics1_properties_typeProperties_server": {
 			"type": "string",
-			"defaultValue": "udacityc2demo.sql.azuresynapse.net"
+			"defaultValue": "udacitydemoc2demo.sql.azuresynapse.net"
 		},
 		"AzureSynapseAnalytics1_properties_typeProperties_database": {
 			"type": "string",
