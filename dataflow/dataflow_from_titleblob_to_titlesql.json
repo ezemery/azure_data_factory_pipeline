@@ -1,0 +1,50 @@
+{
+	"name": "dataflow_from_titleblob_to_titlesql",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "titlemaster_dataset",
+						"type": "DatasetReference"
+					},
+					"name": "BlobStorage"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "nycpayrolltitle_dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SqlDB"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          TitleCode as string,",
+				"          TitleDescription as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> BlobStorage",
+				"BlobStorage sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          TitleCode,",
+				"          TitleDescription",
+				"     )) ~> SqlDB"
+			]
+		}
+	}
+}

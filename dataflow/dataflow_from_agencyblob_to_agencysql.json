@@ -1,0 +1,51 @@
+{
+	"name": "dataflow_from_agencyblob_to_agencysql",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "agencymaster_dataset",
+						"type": "DatasetReference"
+					},
+					"name": "BlobStorage"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "nycpayrollagency_dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SqlDB",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          AgencyID as string,",
+				"          AgencyName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> BlobStorage",
+				"BlobStorage sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SqlDB"
+			]
+		}
+	}
+}

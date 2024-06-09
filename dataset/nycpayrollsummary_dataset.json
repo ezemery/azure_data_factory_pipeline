@@ -1,0 +1,17 @@
+{
+	"name": "nycpayrollsummary_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "NYC_Payroll_Summary"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
