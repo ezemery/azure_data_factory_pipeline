@@ -32,7 +32,11 @@
 						"referenceName": "stagingBlob",
 						"type": "DatasetReference"
 					},
-					"name": "sinktoBlobStorage"
+					"name": "sinktoBlobStorage",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -57,7 +61,7 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     dataflow_param_fiscalyear2020 as string (2020)",
+				"     dataflow_param_fiscalyear2020 as integer (2020)",
 				"}",
 				"source(output(",
 				"          FiscalYear as integer,",
@@ -141,6 +145,7 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
+				"     truncate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
@@ -149,7 +154,12 @@
 				"     validateSchema: false,",
 				"     truncate: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinktoBlobStorage"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          FiscalYear,",
+				"          AgencyName,",
+				"          TotalPaid",
+				"     )) ~> sinktoBlobStorage"
 			]
 		}
 	}
