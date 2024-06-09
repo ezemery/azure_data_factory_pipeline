@@ -57,7 +57,7 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     dataflow_param_fiscalyear2020 as integer (2020)",
+				"     dataflow_param_fiscalyear2020 as string (2020)",
 				"}",
 				"source(output(",
 				"          FiscalYear as integer,",
