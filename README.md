@@ -15,6 +15,8 @@ The source data resides in Azure Data Lake and needs to be processed in a NYC da
 
 * Pipeline Overview;
 ![pipeline overview](files/data_factory_pipeline_overview.png)
+* Data Factory Pipeline deployment;
+![pipeline run in data factory](files/data_factory_pipeline_run.png)
 * Pipeline deployment success in azure synapse;
 ![pipeline success in azure synapse](files/data_factory_synapse_analytics_pipeline_success.png)
 * Pipeline deployment success in Azure SQL DB;
