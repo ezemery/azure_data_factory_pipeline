@@ -18,7 +18,11 @@
 						"referenceName": "nycpayroll2021_dataset",
 						"type": "DatasetReference"
 					},
-					"name": "SqlDB"
+					"name": "SqlDB",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureDataLakeStorage1",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [],

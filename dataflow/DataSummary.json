@@ -34,7 +34,7 @@
 					},
 					"name": "sinktoBlobStorage",
 					"rejectedDataLinkedService": {
-						"referenceName": "AzureBlobStorage1",
+						"referenceName": "AzureDataLakeStorage1",
 						"type": "LinkedServiceReference"
 					}
 				}
@@ -153,6 +153,9 @@
 				"aggregateColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
