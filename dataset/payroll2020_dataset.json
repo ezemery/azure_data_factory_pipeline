@@ -2,17 +2,17 @@
 	"name": "payroll2020_dataset",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": "nycpayroll_2020.csv",
 				"folderPath": "dirhistoryfiles",
-				"container": "adlsnycpayroll-yourfirstname-lastintial"
+				"fileSystem": "adlsnycpayroll-yourfirstname-lastintial"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

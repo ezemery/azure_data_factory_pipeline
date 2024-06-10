@@ -2,16 +2,16 @@
 	"name": "stagingBlob",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "AzureBlobFSLocation",
 				"folderPath": "dirstaging",
-				"container": "adlsnycpayroll-yourfirstname-lastintial"
+				"fileSystem": "adlsnycpayroll-yourfirstname-lastintial"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
