@@ -14,6 +14,9 @@
 		"AzureSynapseAnalytics1_password": {
 			"value": ""
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
 		"AzureSynapseAnalytics1_properties_typeProperties_server": {
 			"value": "udacitydemoc2demo.sql.azuresynapse.net"
 		},
@@ -22,6 +25,9 @@
 		},
 		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
 			"value": "udacity_admin"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://udacityc2.dfs.core.windows.net/"
 		}
 	}
 }
