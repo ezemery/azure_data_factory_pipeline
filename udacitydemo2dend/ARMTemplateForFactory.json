@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
@@ -19,9 +23,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSynapseAnalytics1'"
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://udacityc2.dfs.core.windows.net/"
 		},
 		"AzureSynapseAnalytics1_properties_typeProperties_server": {
 			"type": "string",
@@ -34,10 +38,6 @@
 		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "udacity_admin"
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://udacityc2.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -835,6 +835,23 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -908,7 +925,7 @@
 							},
 							"name": "sinktoBlobStorage",
 							"rejectedDataLinkedService": {
-								"referenceName": "AzureBlobStorage1",
+								"referenceName": "AzureDataLakeStorage1",
 								"type": "LinkedServiceReference"
 							}
 						}
@@ -1045,7 +1062,7 @@
 				"[concat(variables('factoryId'), '/datasets/nycpayroll2021_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/nycpayrollsummary_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/stagingBlob')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		},
 		{
@@ -1072,7 +1089,7 @@
 							},
 							"name": "SqlDB",
 							"rejectedDataLinkedService": {
-								"referenceName": "AzureBlobStorage1",
+								"referenceName": "AzureDataLakeStorage1",
 								"type": "LinkedServiceReference"
 							}
 						}
@@ -1103,7 +1120,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/agencymaster_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/nycpayrollagency_dataset')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		},
 		{
@@ -1128,7 +1145,11 @@
 								"referenceName": "nycpayrollemp_dataset",
 								"type": "DatasetReference"
 							},
-							"name": "SqlDB"
+							"name": "SqlDB",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],
@@ -1161,7 +1182,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/empmaster_dataset')]",
-				"[concat(variables('factoryId'), '/datasets/nycpayrollemp_dataset')]"
+				"[concat(variables('factoryId'), '/datasets/nycpayrollemp_dataset')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		},
 		{
@@ -1186,7 +1208,11 @@
 								"referenceName": "nycpayroll2020_dataset",
 								"type": "DatasetReference"
 							},
-							"name": "SqlDB"
+							"name": "SqlDB",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],
@@ -1251,7 +1277,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/payroll2020_dataset')]",
-				"[concat(variables('factoryId'), '/datasets/nycpayroll2020_dataset')]"
+				"[concat(variables('factoryId'), '/datasets/nycpayroll2020_dataset')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		},
 		{
@@ -1276,7 +1303,11 @@
 								"referenceName": "nycpayroll2021_dataset",
 								"type": "DatasetReference"
 							},
-							"name": "SqlDB"
+							"name": "SqlDB",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],
@@ -1341,7 +1372,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/payroll2021_dataset')]",
-				"[concat(variables('factoryId'), '/datasets/nycpayroll2021_dataset')]"
+				"[concat(variables('factoryId'), '/datasets/nycpayroll2021_dataset')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		},
 		{
@@ -1366,7 +1398,11 @@
 								"referenceName": "nycpayrolltitle_dataset",
 								"type": "DatasetReference"
 							},
-							"name": "SqlDB"
+							"name": "SqlDB",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],
@@ -1397,25 +1433,9 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/titlemaster_dataset')]",
-				"[concat(variables('factoryId'), '/datasets/nycpayrolltitle_dataset')]"
+				"[concat(variables('factoryId'), '/datasets/nycpayrolltitle_dataset')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
 		}
 	]
 }

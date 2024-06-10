@@ -34,7 +34,11 @@
 								"referenceName": "nycpayroll2020_dataset",
 								"type": "DatasetReference"
 							},
-							"name": "SqlDB"
+							"name": "SqlDB",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],
@@ -121,7 +125,11 @@
 								"referenceName": "nycpayroll2021_dataset",
 								"type": "DatasetReference"
 							},
-							"name": "SqlDB"
+							"name": "SqlDB",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],
@@ -208,7 +216,11 @@
 								"referenceName": "nycpayrolltitle_dataset",
 								"type": "DatasetReference"
 							},
-							"name": "SqlDB"
+							"name": "SqlDB",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],

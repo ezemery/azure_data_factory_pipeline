@@ -8,14 +8,17 @@
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
 		"AzureSynapseAnalytics1_password": {
 			"value": ""
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"value": ""
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://udacityc2.dfs.core.windows.net/"
 		},
 		"AzureSynapseAnalytics1_properties_typeProperties_server": {
 			"value": "udacitydemoc2demo.sql.azuresynapse.net"
@@ -25,9 +28,6 @@
 		},
 		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
 			"value": "udacity_admin"
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"value": "https://udacityc2.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"value": ""
